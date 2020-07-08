@@ -15,6 +15,12 @@ var meetsCriteria = false;
 //Initializes counter variables to keep track of how many of each type of character is included in the generated password.
 var numberOfUpper, numberOfLower, numberOfNumerical, numberOfSpecial = 0;
 
+
+function randomIndex(array){
+  return Math.floor(Math.random()*array.length);
+}
+
+
 function generatePassword(){
 
   //Prompts user for desired length of password until a valid answer is given
@@ -48,7 +54,7 @@ function generatePassword(){
   }
 
 
-  
+
 }
 
 
