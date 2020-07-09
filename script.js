@@ -1,6 +1,7 @@
 
 
 //Initializes String Objects of upper case letters, lower case letters, numerical characters, and special characters.
+
 const lowerCase = new String("abcdefghijklmnopqrstuvwxyz");
 const upperCase = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 const numerical = new String("0123456789");
@@ -14,6 +15,13 @@ var meetsCriteria = false;
 
 //Initializes counter variables to keep track of how many of each type of character is included in the generated password.
 var numberOfUpper = 0, numberOfLower = 0, numberOfNumerical = 0, numberOfSpecial = 0;
+
+//Declares variables for the desired password criteria.
+var desiredPWLength;
+var mustContainLower;
+var mustContainUpper;
+var mustContainNumerical;
+var mustContainSpecial;
 
 //takes a single array (or string) as an argument and returns a random index within that array
 function randomIndex(array){
@@ -45,89 +53,73 @@ function chooseChar(parentArray){
 
 }
 
+//returns true if password length equals desired length, if password contains all char types requested, and does not include any unrequested char types
+//returns false if any of the above criteria are not met.
+function checkCriteria(){
+  return (password.length === desiredPWLength 
+    && (mustContainLower === (numberOfLower > 0))
+    && (mustContainUpper === (numberOfUpper > 0))
+    && (mustContainNumerical === (numberOfNumerical > 0))
+    && (mustContainSpecial === (numberOfSpecial > 0))
+  );
+}
 
 function generatePassword(){
 
   //Prompts user for desired length of password until a valid answer is given
-  var desiredPWLength = prompt("How long would you like your password to be? Please choose a number between 8 and 128.");
+  desiredPWLength = prompt("How long would you like your password to be? Please choose a number between 8 and 128.");
   while (!(Number.isInteger(parseInt(desiredPWLength))) || parseInt(desiredPWLength) < 8 || parseInt(desiredPWLength) > 128){
     desiredPWLength = prompt("Invalid entry. Please enter a number between 8 and 128");
   }
+  desiredPWLength = parseInt(desiredPWLength);
+
+  console.log(desiredPWLength);
 
   //Asks user whether password should contain lowercase letters and if so adds lowerCase array to array of criteria
-  var mustContainLower = confirm("Do you want your new password to contain lower case letter?"); 
+  mustContainLower = confirm("Do you want your new password to contain lower case letter?"); 
   if (mustContainLower === true){
     criteria[criteria.length] = lowerCase;
   }
 
   //same as above but with upper case
-  var mustContainUpper = confirm("Do you want your new password to contain upper case letter?");
+  mustContainUpper = confirm("Do you want your new password to contain upper case letter?");
   if (mustContainUpper === true){
     criteria[criteria.length] = upperCase;
   }
 
   //same as above but with numerical chars
-  var mustContainNumerical = confirm("Do you want your new password to contain numerical character?");
+  mustContainNumerical = confirm("Do you want your new password to contain numerical character?");
   if (mustContainNumerical === true){
     criteria[criteria.length] = numerical;
   }
 
   //same as above but with special chars
-  var mustContainSpecial = confirm("Do you want your new password to contain special characters?");
+  mustContainSpecial = confirm("Do you want your new password to contain special characters?");
   if (mustContainSpecial === true){
     criteria[criteria.length] = special;
   }
 
-  console.log("lower, uppper, numerical, special");
-  console.log(numberOfLower);
-  console.log(numberOfUpper);
-  console.log(numberOfNumerical);
-  console.log(numberOfSpecial);
+  
 
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
-  console.log(chooseChar(criteria));
+  while((!meetsCriteria)){
 
-  console.log("lower, uppper, numerical, special");
-  console.log(numberOfLower);
-  console.log(numberOfUpper);
-  console.log(numberOfNumerical);
-  console.log(numberOfSpecial);
+    //initialized empty password
+    password = "";
 
-  // while(!meetsCriteria){
+    for(var i = 0; i < desiredPWLength; i++){
+      password = password + chooseChar(criteria);
+    }
 
-  //   //initialized empty password
-  //   password = "";
+    
+    console.log(password);
+    meetsCriteria = checkCriteria();
+    console.log(meetsCriteria);
+   
 
-  //   for(var i = 0; i < desiredPWLength; i++){
+  }
 
-  //   }
-  // }
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 // Assignment Code
@@ -145,4 +137,5 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+console.log(password);
 
