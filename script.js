@@ -56,7 +56,7 @@ function chooseChar(parentArray){
 //returns true if password length equals desired length, if password contains all char types requested, and does not include any unrequested char types
 //returns false if any of the above criteria are not met.
 function checkCriteria(){
-  return (password.length === desiredPWLength 
+  return (generatedPassword.length === desiredPWLength 
     && (mustContainLower === (numberOfLower > 0))
     && (mustContainUpper === (numberOfUpper > 0))
     && (mustContainNumerical === (numberOfNumerical > 0))
@@ -104,38 +104,36 @@ function generatePassword(){
   while((!meetsCriteria)){
 
     //initialized empty password
-    password = "";
+    generatedPassword = "";
 
     for(var i = 0; i < desiredPWLength; i++){
-      password = password + chooseChar(criteria);
+      generatedPassword = generatedPassword + chooseChar(criteria);
     }
 
-    
-    console.log(password);
     meetsCriteria = checkCriteria();
-    console.log(meetsCriteria);
    
 
   }
 
-
+  return generatedPassword;
 }
-
-
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  document.getElementById("password").value = password;
+
+  // var passwordText = document.querySelector("#password");
+
+  // passwordText.value = password;
 
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-console.log(password);
+
 
