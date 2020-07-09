@@ -1,10 +1,10 @@
 
 
-//Initializing arrays of upper case letter, lower case letters, numerical characters, and special characters.
-var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var numerical = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var special = [" ", "!", "#", "$", "%", "&", "'", "\"", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~",];
+//Initializes String Objects of upper case letters, lower case letters, numerical characters, and special characters.
+const lowerCase = new String("abcdefghijklmnopqrstuvwxyz");
+const upperCase = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+const numerical = new String("0123456789");
+const special = new String(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
 
 //Initializing empty array to store password criteria
 var criteria = []; 
@@ -13,11 +13,36 @@ var criteria = [];
 var meetsCriteria = false;
 
 //Initializes counter variables to keep track of how many of each type of character is included in the generated password.
-var numberOfUpper, numberOfLower, numberOfNumerical, numberOfSpecial = 0;
+var numberOfUpper = 0, numberOfLower = 0, numberOfNumerical = 0, numberOfSpecial = 0;
 
-
+//takes a single array (or string) as an argument and returns a random index within that array
 function randomIndex(array){
+
   return Math.floor(Math.random()*array.length);
+
+}
+
+/*takes a single array as an argument, chooses a character string element at random, increments the char counter of that type, 
+and returns a random char in that string. */
+function chooseChar(parentArray){
+
+  var charString = parentArray[randomIndex(parentArray)];
+  var chosenChar = charString[randomIndex(charString)];
+
+  String.p
+  if (lowerCase.indexOf(chosenChar) > -1){
+    numberOfLower++;
+
+  } else if(upperCase.indexOf(chosenChar) > -1){
+    numberOfUpper++;
+
+  } else if(numerical.indexOf(chosenChar) > -1){
+    numberOfNumerical++;
+
+  } else numberOfSpecial++;
+
+  return chosenChar;
+
 }
 
 
@@ -53,7 +78,44 @@ function generatePassword(){
     criteria[criteria.length] = special;
   }
 
+  console.log("lower, uppper, numerical, special");
+  console.log(numberOfLower);
+  console.log(numberOfUpper);
+  console.log(numberOfNumerical);
+  console.log(numberOfSpecial);
 
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+  console.log(chooseChar(criteria));
+
+  console.log("lower, uppper, numerical, special");
+  console.log(numberOfLower);
+  console.log(numberOfUpper);
+  console.log(numberOfNumerical);
+  console.log(numberOfSpecial);
+
+  // while(!meetsCriteria){
+
+  //   //initialized empty password
+  //   password = "";
+
+  //   for(var i = 0; i < desiredPWLength; i++){
+
+  //   }
+  // }
 
 }
 
