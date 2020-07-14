@@ -126,9 +126,6 @@ function writePassword() {
 
   document.getElementById("password").value = password;
 
-  // var passwordText = document.querySelector("#password");
-
-  // passwordText.value = password;
 
 }
 
